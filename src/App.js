@@ -3,7 +3,7 @@ import { Router, Header } from './components';
 
 function App() {
   return (
-    <div>
+    <div className="bg-gray-800 text-white">
       <Header />
       <Router />
     </div>
