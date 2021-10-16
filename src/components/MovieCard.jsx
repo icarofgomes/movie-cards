@@ -1,5 +1,3 @@
-// https://larainfo.com/blogs/tailwind-css-carousel-slider-examples
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -8,7 +6,6 @@ class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
     const { title, storyline, id, imagePath } = movie;
-    console.log(window.screen.width)
     return (
       <div
         className="p-4 md:p-2"
