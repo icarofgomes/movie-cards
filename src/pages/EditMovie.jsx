@@ -1,55 +1,41 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Loading, MovieForm } from '../components';
 import * as movieAPI from '../services/movieAPI';
 
-class EditMovie extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      movie: '',
-      shouldRedirect: false,
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function EditMovie ({ match: { params: { id } } }) {
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [movie, setMovie] = useState('');
 
-  async componentDidMount() {
-    this.fetchDetails();
-  }
+  useEffect(() => {
+    fetchDetails();
+  })
 
-  async handleSubmit(updatedMovie) {
+  const handleSubmit = async(updatedMovie) => {
     await movieAPI.updateMovie(updatedMovie);
-    this.setState({
-      movie: updatedMovie,
-      shouldRedirect: true,
-    });
+    setMovie(updatedMovie);
+    setShouldRedirect(true);
   }
 
-  fetchDetails = async () => {
-    const { match: { params: { id } } } = this.props;
+  const fetchDetails = async () => {
     const movieDetails = await movieAPI.getMovie(id);
-    this.setState({
-      movie: movieDetails,
-    });
+    setMovie(movieDetails);
   }
 
-  render() {
-    const { shouldRedirect, movie } = this.state;
-    if (shouldRedirect) return <Redirect to="/movie-cards" />;
+  if (shouldRedirect) return <Redirect to="/movie-cards" />;
 
-    if (movie === '') return <Loading />;
+  if (movie === '') return <Loading />;
 
-    return (
-      <div data-testid="edit-movie">
-        <MovieForm movie={ movie } onSubmit={ this.handleSubmit } />
-      </div>
-    );
-  }
+  return (
+    <div data-testid="edit-movie">
+      <MovieForm movie={ movie } onSubmit={ handleSubmit } />
+    </div>
+  );
 }
 
 EditMovie.propTypes = {
-  match: PropTypes.objectOf(PropTypes.object).isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default EditMovie;

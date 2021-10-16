@@ -1,60 +1,45 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import * as movieAPI from '../services/movieAPI';
 import { Loading } from '../components';
 
-class MovieDetails extends Component {
-  constructor(props) {
-    super(props);
+function MovieDetails ({ match: { params: { id } } }) {
+  const [movie, setMovie] = useState('');
 
-    this.state = {
-      movie: '',
-    };
-  }
+  useEffect(() => {
+    const fetchDetails = async () => {
+      const movieDetails = await movieAPI.getMovie(id);
+      setMovie(movieDetails);
+    }
 
-  async componentDidMount() {
-    this.fetchDetails();
-  }
+    fetchDetails();
+  })
 
-  fetchDetails = async () => {
-    const { match: { params: { id } } } = this.props;
-    const movieDetails = await movieAPI.getMovie(id);
-    this.setState({
-      movie: movieDetails,
-    });
-  }
-
-  deleteFunction = async () => {
-    const { match: { params: { id } } } = this.props;
+  const deleteFunction = async () => {
     await movieAPI.deleteMovie(id);
   }
 
-  render() {
-    // Change the condition to check the state
-    const { movie } = this.state;
-    const { title, storyline, imagePath, genre, rating, subtitle, id } = movie;
-    if (!title) return <Loading />;
+  const { title, storyline, imagePath, genre, rating, subtitle } = movie;
+  if (movie === '') return <Loading />;
 
-    return (
-      <div data-testid="movie-details">
-        <h1>{ `Title: ${title}` }</h1>
-        <img alt="Movie Cover" src={ imagePath }/>
-        <p>{ `Subtitle: ${subtitle}` }</p>
-        <p>{ `Storyline: ${storyline}` }</p>
-        <p>{ `Genre: ${genre}` }</p>
-        <p>{ `Rating: ${rating}` }</p>
-        <Link to="/movie-cards">VOLTAR</Link>
-        <Link to={ `${id}/edit` }>EDITAR</Link>
-        <Link to="/movie-cards" onClick={ this.deleteFunction }>DELETAR</Link>
-      </div>
-    );
-  }
+  return (
+    <div data-testid="movie-details">
+      <h1>{ `Title: ${title}` }</h1>
+      <img alt="Movie Cover" src={ imagePath } width="250px"/>
+      <p>{ `Subtitle: ${subtitle}` }</p>
+      <p>{ `Storyline: ${storyline}` }</p>
+      <p>{ `Genre: ${genre}` }</p>
+      <p>{ `Rating: ${rating}` }</p>
+      <Link to="/movie-cards">VOLTAR</Link>
+      <Link to={ `${id}/edit` }>EDITAR</Link>
+      <Link to="/movie-cards" onClick={ deleteFunction }>DELETAR</Link>
+    </div>
+  );
 }
 
 MovieDetails.propTypes = {
-  match: PropTypes.objectOf(PropTypes.object).isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default MovieDetails;
