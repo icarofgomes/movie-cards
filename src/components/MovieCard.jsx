@@ -13,7 +13,10 @@ function MovieCard ({ movie }) {
         <div className="flex justify-between pb-4">
           <h3 className="text-xl font-bold text-green-600">{ title }</h3>
           <div className="flex items-center justify-end">
-            <svg class="w-6 h-6 text-gray-900 fill-current" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6 text-gray-900 fill-current"
+              viewBox="0 0 24 24"
+            >
               <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19
                 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
             </svg>

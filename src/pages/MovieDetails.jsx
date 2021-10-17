@@ -51,7 +51,7 @@ function MovieDetails ({ match: { params: { id } } }) {
             </p>
           </div>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between md:justify-evenly">
           <Link to="/movie-cards">
             <div className="mt-4 px-1.5 text-xl w-full text-white bg-green-600 py-1.5
               rounded-xl shadow-lg text-center font-bold">

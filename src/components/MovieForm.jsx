@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { InputField } from '.';
 
 const INITIAL_STATE = {
   title: '',
@@ -20,135 +21,118 @@ function MovieForm ({ movie = INITIAL_STATE, onSubmit}) {
     onSubmit(movieInfo);
   }
 
-  const updateMovie = (field, newValue) => {
-    setMovieInfo({...movieInfo, [field]: newValue});
-  }
-
-  const renderTitleInput = () => {
-    return (
-      <div>
-        <label htmlFor="movie_title">
-          <input
-            placeholder="Insira o título"
-            id="movie_title"
-            type="text"
-            className="validate"
-            value={ movieInfo.title }
-            onChange={ (event) => updateMovie('title', event.target.value) }
-          />
-          Título
-        </label>
-      </div>
-    );
-  }
-
-  const renderSubtitleInput = () => {
-    return (
-      <div>
-        <label htmlFor="movie_subtitle">
-          <input
-            placeholder="Insira o subtítulo"
-            id="movie_subtitle"
-            type="text"
-            value={ movieInfo.subtitle }
-            onChange={ (event) => updateMovie('subtitle', event.target.value) }
-          />
-          Subtítulo
-        </label>
-      </div>
-    );
-  }
-
-  const renderImagePathInput = () => {
-    return (
-      <div className="row">
-        <label htmlFor="movie_image">
-          <input
-            placeholder="Insira o caminho da imagem"
-            id="movie_image"
-            type="text"
-            value={ movieInfo.imagePath }
-            onChange={ (event) => updateMovie('imagePath', event.target.value) }
-          />
-          Imagem
-        </label>
-      </div>
-    );
-  }
-
-  const renderStorylineInput = () => {
-    return (
-      <div>
-        <label htmlFor="movie_storyline">
-          <textarea
-            id="movie_storyline"
-            value={ movieInfo.storyline }
-            onChange={ (event) => updateMovie('storyline', event.target.value) }
-          />
-          Sinopse
-        </label>
-      </div>
-    );
+  const updateMovie = ({ target: { name, value} }) => {
+    setMovieInfo({...movieInfo, [name]: value});
   }
 
   const renderGenreSelection = () => {
     return (
-      <div>
-        <label htmlFor="movie_genre">
-          Gênero
-          <select
-            id="movie_genre"
-            value={ movieInfo.genre }
-            onChange={ (event) => updateMovie('genre', event.target.value) }
+      <div className="p-2 flex flex-col bg-white">
+        <div className="flex flex-col space-y-2">
+          <label
+            className="text-gray-700 select-none font-medium" 
+            htmlFor="movie_genre"
           >
-            <option value="action">Ação</option>
-            <option value="comedy">Comédia</option>
-            <option value="thriller">Suspense</option>
-            <option value="fantasy">Fantasia</option>
-          </select>
-        </label>
+            <div className="mr-2 text-green-600 font-bold text-lg">Genre</div>
+            <select
+              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none
+                focus:ring-2 focus:ring-green-600 md:p-0"
+              id="movie_genre"
+              value={ movieInfo.genre }
+              onChange={ updateMovie }
+              name="genre"
+            >
+              <option value="action">Ação</option>
+              <option value="comedy">Comédia</option>
+              <option value="thriller">Suspense</option>
+              <option value="fantasy">Fantasia</option>
+            </select>
+          </label>
+        </div>
       </div>
     );
   }
 
   const renderRatingInput = () => {
     return (
-      <div>
-        <label htmlFor="movie_rating">
-          <input
-            placeholder="Dê a avaliação do filme"
-            id="movie_rating"
-            type="number"
-            step={ 0.1 }
-            min={ 0 }
-            max={ 5 }
-            value={ movieInfo.rating }
-            onChange={ (event) => updateMovie('rating', event.target.value) }
-          />
-          Avaliação
-        </label>
+      <div className="p-2 flex flex-col bg-white">
+        <div className="flex flex-col space-y-2">
+          <label
+            className="text-gray-700 select-none font-medium"
+            htmlFor="movie_rating">
+            <div className="mr-2 text-green-600 font-bold text-lg">Rating</div>
+            <input
+              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none
+                focus:ring-2 focus:ring-green-600 md:p-0"
+              placeholder="Dê a avaliação do filme"
+              id="movie_rating"
+              type="number"
+              step={ 0.1 }
+              min={ 0 }
+              max={ 5 }
+              value={ movieInfo.rating }
+              name="rating"
+              onChange={ updateMovie }
+            />
+          </label>
+        </div>
+      </div>
+    );
+  }
+
+  const renderStorylineInput = () => {
+    return (
+      <div className="p-2 flex flex-col bg-white">
+        <div className="flex flex-col space-y-2">
+          <label
+            className="text-gray-700 select-none font-medium"
+            htmlFor="movie_storyline">
+            <div className="mr-2 text-green-600 font-bold text-lg">Storyline</div>
+            <textarea
+              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none
+                focus:ring-2 focus:ring-green-600 w-full md:p-0"
+              id="movie_storyline"
+              value={ movieInfo.storyline }
+              name="storyline"
+              onChange={ updateMovie }
+              rows="3"
+            />
+          </label>
+        </div>
       </div>
     );
   }
 
    const renderSubmitButton = () => {
     return (
-      <div>
-        <button
-          type="button"
-          onClick={ handleSubmit }
-        >
-          Submit
-        </button>
-      </div>
+      <button
+        className="mt-4 px-1.5 text-xl w-full text-white bg-green-600 py-1.5
+          rounded-xl shadow-lg text-center font-bold"
+        type="button"
+        onClick={ handleSubmit }
+      >
+        Submit
+      </button>
     );
 }
   return (
-    <div className="text-black">
+    <div className="text-black bg-white w-5/6 mx-auto mt-5 rounded-lg p-2 md:w-3/6">
       <form>
-        { renderTitleInput() }
-        { renderSubtitleInput() }
-        { renderImagePathInput() }
+        <InputField
+          name="title"
+          updateMovie={ updateMovie }
+          value={ movieInfo.title }
+        />
+        <InputField
+          name="subtitle"
+          updateMovie={ updateMovie }
+          value={ movieInfo.subtitle }
+        />
+        <InputField
+          name="imagePath"
+          updateMovie={ updateMovie }
+          value={ movieInfo.imagePath }
+        />
         { renderStorylineInput() }
         { renderGenreSelection() }
         { renderRatingInput() }
