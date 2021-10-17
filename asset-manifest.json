@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/movie-cards/static/css/main.d95ae905.chunk.css",
-    "main.js": "/movie-cards/static/js/main.4f2471ee.chunk.js",
-    "main.js.map": "/movie-cards/static/js/main.4f2471ee.chunk.js.map",
+    "main.css": "/movie-cards/static/css/main.a8041977.chunk.css",
+    "main.js": "/movie-cards/static/js/main.e68b49a6.chunk.js",
+    "main.js.map": "/movie-cards/static/js/main.e68b49a6.chunk.js.map",
     "runtime-main.js": "/movie-cards/static/js/runtime-main.8ff081af.js",
     "runtime-main.js.map": "/movie-cards/static/js/runtime-main.8ff081af.js.map",
     "static/css/2.0157bf1f.chunk.css": "/movie-cards/static/css/2.0157bf1f.chunk.css",
@@ -10,14 +10,14 @@
     "static/js/2.9b733aa6.chunk.js.map": "/movie-cards/static/js/2.9b733aa6.chunk.js.map",
     "index.html": "/movie-cards/index.html",
     "static/css/2.0157bf1f.chunk.css.map": "/movie-cards/static/css/2.0157bf1f.chunk.css.map",
-    "static/css/main.d95ae905.chunk.css.map": "/movie-cards/static/css/main.d95ae905.chunk.css.map",
+    "static/css/main.a8041977.chunk.css.map": "/movie-cards/static/css/main.a8041977.chunk.css.map",
     "static/js/2.9b733aa6.chunk.js.LICENSE.txt": "/movie-cards/static/js/2.9b733aa6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8ff081af.js",
     "static/css/2.0157bf1f.chunk.css",
     "static/js/2.9b733aa6.chunk.js",
-    "static/css/main.d95ae905.chunk.css",
-    "static/js/main.4f2471ee.chunk.js"
+    "static/css/main.a8041977.chunk.css",
+    "static/js/main.e68b49a6.chunk.js"
   ]
 }
